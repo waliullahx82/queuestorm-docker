@@ -2,16 +2,34 @@
 
 Build and run QueueStorm as one container. The image builds the React UI into `dist/` and runs the Node server that serves the UI plus `GET /health` and `POST /sort-ticket`.
 
-## Build
+## API key
 
-```bash
-docker build -t queuestorm .
+Keep your Gemini key in local `.env.local`:
+
+```text
+GEMINI_API_KEY=your-key-here
 ```
 
-## Run rules-only
+`.env.local` is ignored by Git and Docker build context, so the key is not baked into the image or pushed to GitHub.
+
+## Recommended: Docker Compose
+
+Build and run with the API key loaded from `.env.local`:
 
 ```bash
-docker run --rm -p 3001:3001 queuestorm
+docker compose up --build -d
+```
+
+On Windows, you can also run:
+
+```bat
+docker-up.bat
+```
+
+Stop it:
+
+```bash
+docker compose down
 ```
 
 Open:
@@ -20,10 +38,24 @@ Open:
 http://localhost:3001
 ```
 
-## Run with Gemini
+## Plain Docker
+
+Build:
 
 ```bash
-docker run --rm -p 3001:3001 -e GEMINI_API_KEY=your-key-here queuestorm
+docker build -t queuestorm .
+```
+
+Run rules-only:
+
+```bash
+docker run --rm -p 3001:3001 queuestorm
+```
+
+Run with Gemini using `.env.local`:
+
+```bash
+docker run --rm -p 3001:3001 --env-file .env.local queuestorm
 ```
 
 Optional environment variables:
