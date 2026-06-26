@@ -1,0 +1,13 @@
+services:
+  queuestorm:
+    build: .
+    image: queuestorm:latest
+    container_name: queuestorm
+    restart: unless-stopped
+    env_file:
+      - .env.local
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+    ports:
+      - "3001:3001"
