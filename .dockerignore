@@ -1,0 +1,13 @@
+.git
+.agents
+.claude
+.codex
+.vercel
+dist
+node_modules
+client/node_modules
+server/test/response.json
+*.log
+.env
+.env.local
+.env*.local
